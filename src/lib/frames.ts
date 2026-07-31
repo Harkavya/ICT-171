@@ -49,4 +49,4 @@ export const getFrame = (slug: string) => frames.find((f) => f.slug === slug);
 
 export const INSTAGRAM_URL = "https://instagram.com/fanlabz";
 export const EMAIL = "orders@fanlabz.in";
-export const GOOGLE_FORM_URL = "https://forms.gle/your-order-form-id";
+export const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSee9YiU60MzlaIueQd-Sk_JS5Owzk0ND9bu6Kq1tgeQ26KH9g/viewform?usp=dialog";

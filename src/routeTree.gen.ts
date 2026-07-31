@@ -15,7 +15,8 @@ import { Route as CatalogRouteImport } from './routes/catalog'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FramesSlugRouteImport } from './routes/frames.$slug'
-import { Route as FramesSlugOrderRouteImport } from './routes/frames.$slug.order'
+import { Route as FramesSlugIndexRouteImport } from './routes/frames.$slug/index'
+import { Route as FramesSlugOrderRouteImport } from './routes/frames.$slug/order'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -47,6 +48,11 @@ const FramesSlugRoute = FramesSlugRouteImport.update({
   path: '/frames/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FramesSlugIndexRoute = FramesSlugIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FramesSlugRoute,
+} as any)
 const FramesSlugOrderRoute = FramesSlugOrderRouteImport.update({
   id: '/order',
   path: '/order',
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/frames/$slug': typeof FramesSlugRouteWithChildren
   '/frames/$slug/order': typeof FramesSlugOrderRoute
+  '/frames/$slug/': typeof FramesSlugIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -68,8 +75,8 @@ export interface FileRoutesByTo {
   '/catalog': typeof CatalogRoute
   '/contact': typeof ContactRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/frames/$slug': typeof FramesSlugRouteWithChildren
   '/frames/$slug/order': typeof FramesSlugOrderRoute
+  '/frames/$slug': typeof FramesSlugIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +87,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/frames/$slug': typeof FramesSlugRouteWithChildren
   '/frames/$slug/order': typeof FramesSlugOrderRoute
+  '/frames/$slug/': typeof FramesSlugIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +99,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/frames/$slug'
     | '/frames/$slug/order'
+    | '/frames/$slug/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -98,8 +107,8 @@ export interface FileRouteTypes {
     | '/catalog'
     | '/contact'
     | '/sitemap.xml'
-    | '/frames/$slug'
     | '/frames/$slug/order'
+    | '/frames/$slug'
   id:
     | '__root__'
     | '/'
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/frames/$slug'
     | '/frames/$slug/order'
+    | '/frames/$slug/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -164,6 +174,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FramesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/frames/$slug/': {
+      id: '/frames/$slug/'
+      path: '/'
+      fullPath: '/frames/$slug/'
+      preLoaderRoute: typeof FramesSlugIndexRouteImport
+      parentRoute: typeof FramesSlugRoute
+    }
     '/frames/$slug/order': {
       id: '/frames/$slug/order'
       path: '/order'
@@ -176,10 +193,12 @@ declare module '@tanstack/react-router' {
 
 interface FramesSlugRouteChildren {
   FramesSlugOrderRoute: typeof FramesSlugOrderRoute
+  FramesSlugIndexRoute: typeof FramesSlugIndexRoute
 }
 
 const FramesSlugRouteChildren: FramesSlugRouteChildren = {
   FramesSlugOrderRoute: FramesSlugOrderRoute,
+  FramesSlugIndexRoute: FramesSlugIndexRoute,
 }
 
 const FramesSlugRouteWithChildren = FramesSlugRoute._addFileChildren(
@@ -197,3 +216,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

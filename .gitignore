@@ -1,4 +1,7 @@
+# -----------------------------
 # Logs
+# -----------------------------
+
 logs
 *.log
 npm-debug.log*
@@ -16,11 +19,17 @@ dist-ssr
 .nitro
 *.local
 
+# -----------------------------
 # Wrangler / Cloudflare
+# -----------------------------
+
 .wrangler/
 .dev.vars
 
+# -----------------------------
 # Editor directories and files
+# -----------------------------
+
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -30,3 +39,38 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# -----------------------------
+# Bun / Nitro / TanStack additions
+# -----------------------------
+.output/
+node_modules/.vite/
+node_modules/.nitro/
+.vite/
+.vite-deps/
+.vite-ssr/
+dist/
+build/
+.server/
+.serverless/
+.netlify/
+.vercel/
+
+# -----------------------------
+# Prevent accidental asset corruption
+# -----------------------------
+# Only allow images inside /assets
+assets/*.js
+assets/*.css
+assets/*.map
+
+# -----------------------------
+# Environment and cache
+# -----------------------------
+.env
+.env.*
+.cache/
+tmp/
+temp/
+*.tmp
+*.bak
