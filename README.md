@@ -390,6 +390,8 @@ INSERT INTO products (name, quantity) VALUES
 EXIT;
 ```
 
+>  **NOTE: Obviously StrongPassword123! is a placeholder, be wise and use a safe and Strong password.**
+
 ### 2. Automated Database Backup Script (`inventory_backup.sh`)
 
 My Bash script exports the MySQL database to a compressed `.sql.gz` archive, logs timestamps, and runs automatically every night via Linux cron.
@@ -437,8 +439,6 @@ sudo chmod +x /usr/local/bin/backup_inventory.sh
 # Register in user crontab
 (crontab -l 2>/dev/null; echo "0 2 * * * /usr/local/bin/backup_inventory.sh") | crontab -
 ```
-
->  **NOTE: Obviously StrongPassword123! is a placeholder, be wise and use a safe and Strong password.**
 
 ### 3. Interactive Python Inventory Manager (`inventory_manager.py`)
 
