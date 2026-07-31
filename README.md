@@ -30,8 +30,6 @@ The platform allows users to browse featured frame collections (Shonen Classic, 
 
 ## Video Explainer
 
-Watch the full ICT171 Fanlabz server architecture walkthrough, script execution demonstration, and live website review:
-
 > 🎥 **[Insert Video Explainer Link Here — YouTube / Google Drive]**
 > *(Video link will be updated upon final project submission)*
 
