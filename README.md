@@ -58,19 +58,19 @@ Watch the full ICT171 Fanlabz server architecture walkthrough, script execution 
 The Fanlabz digital storefront is designed with a dark, neon-lit visual identity tailored to anime and cyberpunk aesthetics:
 
 ### 1. Storefront Hero Section
-![Fanlabz Hero Homepage](docs/screenshots/hero-home.jpg)
+![Fanlabz Homepage](docs/screenshots/home.png)
 *The landing page welcoming collectors to browse handcrafted frames built in India.*
 
 ### 2. Featured Frame Catalog
-![Featured Frames Showcase](docs/screenshots/featured-frames.jpg)
-*The growing catalog showcasing Shonen Classic (₹899), Slice of Life (₹799), and Neon Cyberpunk LED (₹1,299) frames.*
+![Featured Frames Showcase](docs/screenshots/featured-frames.png)
+*The growing catalog showcasing the different frame types currently available.*
 
 ### 3. Product Specification & Order Request Flow
-![Neon Cyberpunk Product Page](docs/screenshots/product-order.jpg)
+![Neon Cyberpunk Product Page](docs/screenshots/product-order.png)
 *Detailed product view where users configure sizing and hand off order requests cleanly to their email app or Google Form.*
 
 ### 4. About & Contact Pages
-![About Fanlabz Project](docs/screenshots/about-page.png)
+![About Fanlabz Project](docs/screenshots/about.png)
 *Documenting the startup's origin and the IaaS cloud server architecture.*
 
 ---
