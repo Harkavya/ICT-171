@@ -65,11 +65,7 @@ The Fanlabz digital storefront is designed with a dark, neon-lit visual identity
 ![Featured Frames Showcase](docs/screenshots/featured-frames.png)
 *The growing catalog showcasing the different frame types currently available.*
 
-### 3. Product Specification & Order Request Flow
-![Neon Cyberpunk Product Page](docs/screenshots/product-order.png)
-*Detailed product view where users configure sizing and hand off order requests cleanly to their email app or Google Form.*
-
-### 4. About & Contact Pages
+### 3. About & Contact Pages
 ![About Fanlabz Project](docs/screenshots/about.png)
 *Documenting the startup's origin and the IaaS cloud server architecture.*
 ![Contacts](docs/screenshots/contacts.png)
