@@ -9,7 +9,7 @@
 [![HTTPS](https://img.shields.io/badge/HTTPS-Let's_Encrypt-2EC4A6?logo=letsencrypt&logoColor=white)](https://letsencrypt.org/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0_Database-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 
-Fanlabz originated as a small startup in India crafting premium, built-to-order poster frames and 3D LED shadowboxes for anime collectors. This repository documents the deployment of Fanlabz's evolving digital storefront for the **ICT171 Introduction to Server Environments and Architectures** Cloud Server Project.
+Fanlabz originated as a small startup in India, crafting premium, built-to-order poster frames and 3D LED Frames for anime collectors. This repository documents the deployment of Fanlabz's evolving digital storefront for the **ICT171 Introduction to Server Environments and Architectures** Cloud Server Project.
 
 The platform allows users to browse featured frame collections (Shonen Classic, Slice of Life, and Neon Cyberpunk), inspect sizing specifications, and submit structured order requests without relying on intermediate third-party SaaS checkout builders. Behind the live web storefront, the Linux server runs automated MySQL database backups via **Bash scripting** and a terminal-based **Python CLI inventory manager** to track frame stock.
 
@@ -260,9 +260,9 @@ After=network.target
 
 [Service]
 Type=simple
-User=azureuser
+User=root
 WorkingDirectory=/var/www/ICT-171
-ExecStart=/home/azureuser/.bun/bin/bun .output/server/index.mjs
+ExecStart=/usr/local/bin/bun .output/server/index.mjs
 Restart=always
 RestartSec=5
 Environment=NODE_ENV=production
