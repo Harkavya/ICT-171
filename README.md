@@ -71,8 +71,10 @@ The Fanlabz digital storefront is designed with a dark, neon-lit visual identity
 
 ### 4. About & Contact Pages
 ![About Fanlabz Project](docs/screenshots/about.png)
-[](docs/screenshots/contacts.png)
 *Documenting the startup's origin and the IaaS cloud server architecture.*
+![Contacts](docs/screenshots/contacts.png)
+*Simple Contact points for customers.*
+
 
 ---
 
