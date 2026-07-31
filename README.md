@@ -30,8 +30,7 @@ The platform allows users to browse featured frame collections (Shonen Classic, 
 
 ## Video Explainer
 
-> 🎥 **[Insert Video Explainer Link Here — YouTube / Google Drive]**
-> *(Video link will be updated upon final project submission)*
+> 🎥 **[Insert Video Explainer Link Here — YouTube / Google Drive](https://drive.google.com/file/d/1JEqKeSnZVK7fEMXR0vLmeG_5pLoZvtSC/view?usp=drive_link)**
 
 ---
 
