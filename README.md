@@ -90,15 +90,15 @@ This project is deployed using **Infrastructure as a Service (IaaS)** on Microso
 
 ### Pragmatic Cloud Sizing: Standard B2ts (1 vCPU, 2 GiB RAM)
 
-I provisioned an Azure **Standard B2ts / B-series burstable virtual machine (1 vCPU, 2 GB RAM)**.
+An Azure **Standard B2ts / B-series burstable virtual machine (1 vCPU, 2 GB RAM)** was provisioned for this server.
 
 * **The Engineering Rationale:** Fanlabz is a fast, lightweight web storefront. Serving optimized assets and proxying requests to an asynchronous Bun server engine consumes minimal CPU overhead. Deploying enterprise-grade hardware (such as 4+ vCPUs or 16 GB RAM) would waste cloud credits. By configuring a **2 GB Linux swap file**, a 2 GB VM comfortably compiles frontend production bundles and runs MySQL 8.0 without performance degradation.
 
 ---
 
-## Complete Cloud Deployment Guide (Chronological Rebuild)
+## Cloud Deployment Guide 
 
-The following step-by-step guide is documented so that any colleague or system administrator can rebuild the Fanlabz production server from scratch in under two hours.
+The following step-by-step guide is documented so that the Fanlabz production server can be rebuilt from scratch in under two hours.
 
 ---
 
@@ -167,7 +167,7 @@ sudo apt update && sudo apt upgrade -y
 > ⚠️ **P.S. Developer Note (Common Pitfall #1):**
 > When compiling modern JavaScript/TypeScript applications (Vite, Nitro, Next.js) on VMs with 2 GB RAM or less, the Linux kernel's Out-Of-Memory (OOM) killer will frequently abort the build with a `Killed` message.
 >
-> **How I Solved It:** I allocated a 2 GB Swap File before running any builds, giving the server virtual memory breathing room.
+> **How I Solved It:** Allocating a 2 GB Swap File before running any builds gives the server virtual memory breathing room.
 
 ```bash
 # 1. Create a 2 GB swap file
@@ -222,7 +222,7 @@ I purchased the domain `fanlabz.shop` through GoDaddy. Inside the GoDaddy DNS Ma
 > ⚠️ **P.S. Developer Note (Common Pitfall #3 — GoDaddy CNAME Rule):**
 > GoDaddy automatically provisions a default CNAME for `www`. If you try to add a duplicate A record for `www`, GoDaddy throws an error: `"Record name conflicts with another record named CNAME"`.
 >
-> **How I Solved It:** Keep the existing CNAME record (`www` → `@`) and only create the root `@` A-record.
+> **NOTE** Keep the existing CNAME record (`www` → `@`) and only create the root `@` A-record.
 
 ---
 
@@ -394,7 +394,7 @@ INSERT INTO products (name, quantity) VALUES
 EXIT;
 ```
 
-### 2. Automated Database Backup Script (`backup_inventory.sh`)
+### 2. Automated Database Backup Script (`inventory_backup.sh`)
 
 My Bash script exports the MySQL database to a compressed `.sql.gz` archive, logs timestamps, and runs automatically every night via Linux cron.
 
@@ -403,12 +403,12 @@ My Bash script exports the MySQL database to a compressed `.sql.gz` archive, log
 >
 > **How I Solved It:** I added the `--no-tablespaces` flag to `mysqldump`. This safely ignores global tablespace queries while 100% preserving table schemas and stock data.
 
-Script Source Code (`/usr/local/bin/backup_inventory.sh`):
+Script Source Code (`/usr/local/bin/inventory_backup.sh`):
 
 ```bash
 #!/bin/bash
 # ==============================================================================
-# Script Name: backup_inventory.sh
+# Script Name: inventory_backup.sh
 # Description: Dumps 'fanlabz_inventory', compresses to .sql.gz, and logs date.
 # ==============================================================================
 
@@ -442,9 +442,11 @@ sudo chmod +x /usr/local/bin/backup_inventory.sh
 (crontab -l 2>/dev/null; echo "0 2 * * * /usr/local/bin/backup_inventory.sh") | crontab -
 ```
 
+>  **NOTE: Obviously StrongPassword123! is a placeholder, be wise and use a safe and Strong password.**
+
 ### 3. Interactive Python Inventory Manager (`inventory_manager.py`)
 
-I developed a Python command-line dashboard that queries live database records using `mysql-connector-python` and formats terminal tables using `tabulate`. It automatically flags items with fewer than 5 units remaining and allows administrators to update quantities in real time.
+I added a Python command-line dashboard that queries live database records using `mysql-connector-python` and formats terminal tables using `tabulate`. It automatically flags items with fewer than 5 units remaining and allows administrators to update quantities in real time.
 
 ```bash
 # Install Python database and formatting dependencies
@@ -615,7 +617,7 @@ Expected Header Response: `HTTP/1.1 200 OK` (with secure SSL encryption).
 
 ## Developer P.S. Cheat-Sheet (Summary of Common Pitfalls)
 
-For students replicating this build, avoid these three common pitfalls that occurred during development:
+For anyone replicating this build, avoid these three common pitfalls that occurred during development:
 
 1. **The TanStack Nested Route Folder Rule:**
    If creating dynamic nested routes in TanStack Start, do not use flat multi-segment filenames like `frames.$slug.order.tsx`. TanStack router will silently ignore the route.
